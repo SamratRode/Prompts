@@ -1,0 +1,39 @@
+1. Verified the use of fundamental HTML semantic components such as,
+
+ 
+
+2. Verified if the tag had an "alt" attribute, which provides alternate text for images.
+
+ 
+
+3. Verified keyboard navigation and tab indexes.
+
+ 
+
+4. Color contrast and readability with appropriate styling were examined.
+
+ 
+
+5. Look for ARIA roles and characteristics such as
+
+a. Use role="banner" to designate the page's primary header
+
+b. To specify the main navigation parts, use role="navigation".
+
+c. Use role="main" to designate the primary content section.
+
+d. Use role="contentinfo" to recognize footers.
+
+e. For search boxes, use role="search" and for search forms, role="form".
+
+f.  Use role="region" and aria-live="polite" to find the regions that change dynamically.
+
+ 
+
+6. Checked for WCAG standards and compliance:
+
+ 
+
+a. Providing text alternatives, time-based media and adaptable content
+
+b. Keyboard accessibility and navigable
