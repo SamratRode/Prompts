@@ -1,0 +1,45 @@
+Web Accessibility
+
+1.	Adjusting the size of accessible elements, so that users with low visibility can easily access the page.
+Using – bootstrap -> js-btn-plus
+
+
+2.	Added Aria-label, so that it is easier for the user using assistive technologies such as Reader, it describes the role of a particular element.
+
+Using – aria-label= ”Decrease Quantity”
+
+3.	Ensuring that all the elements are reachable and operable using keyboard as well.
+Using tabindex=0,-1,1 (focusable). For Example – Make Submit focusable only after, terms and conditions block is clicked.
+
+4.	Once the element is activated, make elements inside it accessible, by adding a js event to change tabindex.
+Example- 
+ <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add event listeners to activate elements on focus
+        var activateElements = document.querySelectorAll('[tabindex="-1"]');
+        activateElements.forEach(function (element) {
+            element.addEventListener('focus', function () {
+                element.setAttribute('tabindex', '0');
+            });
+        });
+    });
+</script>
+5.	To easily help understand, which element is focused, focus styling is applied.
+Using - focus-outline, and enhanced styling on focus elements
+
+6.	Skip to important content link at the beginning of the page.
+Using - <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>, then adding id=”main-content”
+
+7.	Added labels, wherever missing.
+8.	Added Descriptive texts for buttons.
+9.	Provided alt text to images.
+10.	Added a button to enable high contrast, in the web page 
+11.	Only for dynamic validation ->
+<!-- Form Validation Message -->
+            <div role="alert" id="form-validation-error" aria-live="assertive" aria-atomic="true">
+                <!-- Your form validation error message goes here -->
+            </div>
+If validations fails, then an alert is given, which is read simultaneously by reader
+
+12.	Explicitly associate labels with form attributes for=””
+13.	Ensure the link text is descriptive and underlined
