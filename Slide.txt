@@ -1,0 +1,10 @@
+Slide 2: Introduction
+
+Introduction to Web Accessibility:
+
+Web accessibility refers to the inclusive practice of ensuring that people with disabilities can perceive, understand, navigate, and interact with the web. It aims to remove barriers that might prevent access to information and functionality.
+Importance of Web Accessibility:
+
+Inclusion for All: Web accessibility ensures that everyone, regardless of abilities or disabilities, can access and use online content.
+Legal Compliance: Many countries have regulations mandating web accessibility, reinforcing the need for compliance.
+Enhanced User Experience: Improving accessibility often leads to a better user experience for all users, not just those with disabilities.
