@@ -41,6 +41,17 @@ Slide 7: Introduction to ARIA (Accessible Rich Internet Applications)
 Define ARIA.
 Explain how ARIA complements WCAG.
 Highlight the role of ARIA in enhancing the accessibility of dynamic content.
+
+ARIA: Accessible Rich Internet Applications. A set of attributes that can be added to HTML elements to enhance the accessibility of dynamic content for people with disabilities.
+Complementing WCAG:
+
+Enhancing Accessibility: ARIA complements WCAG by addressing accessibility challenges in dynamic content and modern web technologies, offering additional information to assistive technologies.
+Role in Dynamic Content Accessibility:
+
+Enabling Interaction: ARIA plays a crucial role in making dynamic elements, such as those commonly found in modern web applications, accessible to users with disabilities.
+
+Seamless Experience: By providing additional information to assistive technologies, ARIA ensures that users can interact seamlessly with dynamic content, contributing to a more inclusive online experience.
+
 Slide 8: Methodology Overview
 
 Outline the step-by-step methodology for converting JSP code to be web accessible.
