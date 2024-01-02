@@ -56,6 +56,16 @@ Slide 8: Methodology Overview
 
 Outline the step-by-step methodology for converting JSP code to be web accessible.
 Mention the use of generative technologies like ChatGPT in the process.
+
+Feed the code to ChatGPT.
+Analyze the code, and list down all the non-accessible elements.
+Solve each sub-problem individually and integrate in the original code.
+Now, list down all the prompts, that have been used.
+Make an aggregate of all prompt and try this prompt on new code.
+Make minor changes to the prompt, by checking if all the issues have been solved.
+Re-iterate the process to get the finest prompt.
+
+
 Slide 9: Step 1 - Code Analysis
 
 Explain the importance of assessing the existing JSP code.
