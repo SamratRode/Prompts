@@ -303,3 +303,8 @@ Additional Points for Web Accessibility:
 
 10. Descriptive Link Text:
     - Ensure link text is descriptive and underlined for clarity. Make the changes stated above and return the entire modified code, such that the web page obtained is WCAG and ARIA compliant
+
+
+<a href="#mainContent" class="skip-link" role="link" aria-label="Skip to main content">Skip to main content</a>
+
+
