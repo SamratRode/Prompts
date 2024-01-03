@@ -144,3 +144,65 @@ Additional Points for Web Accessibility:
 
 10. Descriptive Link Text:
     - Ensure link text is descriptive and underlined for clarity.
+
+
+
+S.No.	Function	Example
+		
+1.	Adjusting the size of accessible elements, so that users with low visibility can easily access the page.
+	bootstrap -> js-btn-plus
+
+2.	Added Aria-label, so that it is easier for the user using assistive technologies such as Reader, it describes the role of a particular element.
+	aria-label= ”Decrease Quantity”
+3.	Ensuring that all the elements are reachable and operable using keyboard as well.
+	tabindex=0,-1,1 (focusable). 
+
+4.	Once the element is activated, make elements inside it accessible, by adding a js event to change tabindex.
+	JS function to update the attribute.
+5.	To easily help understand, which element is focused, focus styling is applied.
+	Apply CS styling on the focused element.
+6.	Skip to important content link at the beginning of the page.
+	Using – 
+href="#main-content"
+7.	Added labels, wherever missing.
+	Add <label> tag
+8.	Added Descriptive texts for buttons.	Customized text should be given manually.
+9.	Provided alt text to images.
+	Customized text should be given manually.
+10.	Added a button to enable high contrast, in the web page 
+	Added CSS styling to
+
+
+
+Optimizing Web Page Accessibility and WCAG Compliance:
+
+1. Replace the table-based layout with semantic HTML and CSS for styling. Use appropriate HTML tags such as <header>, <nav>, <main>, <article>, <section>, and <aside>.
+2. Ensure proper use of ARIA roles and attributes for accessibility. Make sure important elements have appropriate ARIA attributes.
+3. Ensure all images have descriptive alternative text.
+4. Ensure that dynamic elements are keyboard accessible. Provide visible focus indicators and test with a keyboard.
+5. Consider using relative units like em or rem for font size to improve scalability.
+
+Additional Points for Web Accessibility:
+
+6. Enhance Visual and Keyboard Navigation:
+   - Adjust accessible element sizes for users with low visibility.
+   - Apply focus styles for clear element visibility during keyboard navigation.
+   - Include a "Skip to main content" link at the beginning of the page.
+
+7. Form Accessibility:
+   - Ensure form elements have clear labels using the for attribute.
+   - Add descriptive texts to buttons for improved understanding.
+   - Present validation messages in a perceivable way for all users.
+
+8. Alt Text and Image Accessibility:
+   - Provide meaningful alt text for images to assist screen readers.
+   - Integrate a button for enabling high contrast mode.
+   - Associate labels explicitly with form controls using the for attribute.
+
+9. JavaScript Interaction and Nested Elements:
+   - Activate elements and adjust nested element tabindex dynamically with JS.
+   - Add ARIA-labels to describe element roles for assistive technologies.
+
+10. Descriptive Link Text:
+    - Ensure link text is descriptive and underlined for clarity.
+
