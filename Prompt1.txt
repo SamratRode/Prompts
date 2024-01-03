@@ -307,4 +307,11 @@ Additional Points for Web Accessibility:
 
 <a href="#mainContent" class="skip-link" role="link" aria-label="Skip to main content">Skip to main content</a>
 
+var tmpNode = new YAHOO.widget.TextNode(myobj, tree.getRoot(), false);
+tmpNode.toggle = function () {
+    YAHOO.widget.TextNode.superclass.toggle.call(this);
+    this.getContentEl().setAttribute("aria-expanded", this.expanded);
+};
+
+
 
