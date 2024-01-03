@@ -1,0 +1,305 @@
+To the code, <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
+<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
+<%@ taglib uri="/WEB-INF/c.tld" prefix="c" %>
+
+<jsp:useBean id="configuration" scope="request" class="abc.beans.ConfigurationBean" />
+<jsp:useBean id="fqForm" scope="request" class="abc.forms"fqForm/>
+<script type="text/javascript" language="JavaScript1.2">
+<!--
+
+//-->
+
+document.title = '<bean:message key="lbl.faq.pageHeading"/>' ;
+</script>
+<html:form action="faq" method="POST">
+<!-- FAQ BODY START -->
+<table border="0" cellpadding="0" cellspacing="0" style="WIDTH: 700px">
+	<tr>
+        <td width="10"></td>
+		<td width="10"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+	<td width="10"></td>
+		<td width="10"></td>
+		<td colspan="4">
+<table border="0" cellpadding="0" cellspacing="0">
+
+	<!-- TITLE begin -->
+	<tr>
+		<td></td>
+		<td></td>
+		<td class="ContentTitle1"><br><br><a name="faqTp"></a>Frequently Asked
+		Questions</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<!-- TITLE end -->
+	<!-- INSTRUCTION begin -->
+	<tr>
+		<td></td>
+		<td></td>
+		<td>
+		<p><br>
+		We've compiled a list of frequently asked questions. If you can't find
+		the information you need, please contact your Sun Life Financial
+		Service Representative.</p>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		
+		<td colspan="6">
+		<p><br>
+		</p>
+		</td>
+		
+	</tr>
+	<!-- INSTRUCTION end -->
+	<!-- TABLE OF CONTENTS begin -->
+	<!-- CONTENT 1 begin -->
+	</table>
+	<table>
+	<%
+	int count = 0;
+	%>
+
+	<logic:equal name="fqForm" property="standardReportsAccess" value="TRUE">
+	<tr>
+		<td width="2%"></td>
+		<td align="left" ><%=++count %>.&nbsp;</td>
+		<td> 
+			<a href="#1.1">ABCD?</a>
+		</td>
+	</tr>
+	</logic:equal>
+	
+	<logic:equal name="fqForm" property="adhcAccess" value="TRUE">
+	<tr>
+	    <td width="2%"></td>
+		<td align="left" ><%=++count %>.&nbsp;</td>
+		<td>
+			<a href="#1.2">I?</a>
+		</td>
+	</tr>
+	</logic:equal>
+	
+	<tr>
+	    <td width="2%"></td>
+		<td align="left" ><%=++count %>.&nbsp;</td>
+		<td>
+			<a href="#1.3">ABCDEFG?</a>
+		</td>
+	</tr>
+	<tr>
+        <td width="2%"></td>
+		<td align="left" ><%=++count %>.&nbsp;</td>
+		<td>
+			<a href="#1.4">I atabcdjcbdajcd </a>
+			<br>			
+		</td>
+	</tr>	
+	
+<!-- CONTENT 1 end -->
+<!-- TABLE OF CONTENTS end -->
+	</table>
+	<table border="0" cellpadding="0" cellspacing="0">
+	<!-- QUESTION 1 begin -->
+	<logic:equal name="fqForm" property="standardReportsAccess" value="TRUE">
+	
+	<logic:equal name="fqForm" property="adhcAccess" value="TRUE">
+	<%
+	count-=4;
+	 %>
+	</logic:equal>
+	<logic:equal name="fqForm" property="adhcAccess" value="FALSE">
+	<%
+	count-=3;
+	%>
+	</logic:equal>
+	
+	</logic:equal>
+	
+	<logic:equal name="fqForm" property="standardReportsAccess" value="FALSE">
+	
+	<logic:equal name="fqForm" property="adhcAccess" value="TRUE">
+		<%
+	count-=3;
+		%>
+	</logic:equal>
+	<logic:equal name="fqForm" property="adhcAccess" value="FALSE">
+	<%
+	count-=2;
+	%>
+	</logic:equal>
+	
+	</logic:equal>
+
+
+<logic:equal name="fqForm" property="standardReportsAccess" value="TRUE">
+	<tr>
+		<td></td>
+		<td></td>
+		<td><br>
+		<a name="1.1"></a>
+		<p class="ContentTitle2"><%=++count %>. Whacdaj asxnsakj sle?</p>
+
+		<p>XYDDFCS CKMCX</p>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	
+	
+	<tr>
+		<td></td>
+		<td></td>
+		<td align="right"><a href="#faqTp" class="cnoBodyLink">...back to top</a></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+    </logic:equal>
+	<logic:equal name="fqForm" property="adhcAccess" value="TRUE">
+	<tr>
+		<td></td>
+		<td></td>
+		<td><br>
+		<a name="1.2"></a>
+		<p class="ContentTitle2"><%=++count %>. Saxascx sxx dkkdndsa</p>
+
+		<p>Yasb asdjhabs asba </p>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+		
+	<tr>
+		<td></td>
+		<td></td>
+		<td align="right"><a href="#faqTp" class="cnoBodyLink">...back to top</a></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	</logic:equal>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><br>
+		<a name="1.3"></a>
+		<p class="ContentTitle2"><%=++count %>. ABCDEFGHSIUC XUI</p>
+
+		<p>ABCDEFGCVXBV
+		 <ol>
+        <li>FDGETRUWNX </li>
+        <li>ESVNSCX SXSFXAX.</li>
+        </ol>
+        ACXVS FACXSA<a href="javascript: openWindow('http://www.abe.com/','Abe');">www.Ade.com</a>.
+       </p>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td align="right"><a href="#faqTp" class="cnoBodyLink">...back to top</a></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><br>
+		<a name="1.4"></a>
+		<p class="ContentTitle2"><%=++count %>. ABCVBS VXA XZAFDXA</p>
+
+		<p>ABCD: 
+		 <ol>
+        <li>EFGDS </li>
+        <li>AVCAFXAXDF AXADFXDA</li>
+        <li>CSFCS ASCXAVSCXS SNJSMN S </li>
+        <li>DSFAXS CVSXXS.</li>
+        <li>FDXCSC VCSCXS SCVAS</li>
+        <li>DFSCDSX SCVSCXDAFDXFDA</li>
+        <li>ACXVS SXSXSCA</li>
+        </ol>
+        SADFXFSA
+       </p>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td></td>
+		<td align="right"><a href="#faqTp" class="cnoBodyLink">...back to top</a></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="6"></td>
+
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+      <td align="center"><br><br>
+      <input id="Close window" name="Close window" type="button" onClick="javascript:window.close()" class="ButtonBase ButtonSize2"	 value="Close window" /></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<!-- QUESTION 1 end -->
+
+
+</table>
+</td>
+</tr>
+</table>
+</html:form>
+
+1. Replace the table-based layout with semantic HTML and CSS for styling. Use appropriate HTML tags such as <header>, <nav>, <main>, <article>, <section>, and <aside>.
+2. Ensure proper use of ARIA roles and attributes for accessibility. Make sure important elements have appropriate ARIA attributes.
+3. Ensure all images have descriptive alternative text.
+4. Ensure that dynamic elements are keyboard accessible. Provide visible focus indicators and test with a keyboard.
+5. Consider using relative units like em or rem for font size to improve scalability.
+
+Additional Points for Web Accessibility:
+
+6. Enhance Visual and Keyboard Navigation:
+   - Adjust accessible element sizes for users with low visibility.
+   - Apply focus styles for clear element visibility during keyboard navigation.
+   - Include a "Skip to main content" link at the beginning of the page.
+
+7. Form Accessibility:
+   - Ensure form elements have clear labels using the for attribute.
+   - Add descriptive texts to buttons for improved understanding.
+   - Present validation messages in a perceivable way for all users.
+
+8. Alt Text and Image Accessibility:
+   - Provide meaningful alt text for images to assist screen readers.
+   - Integrate a button for enabling high contrast mode.
+   - Associate labels explicitly with form controls using the for attribute.
+
+9. JavaScript Interaction and Nested Elements:
+   - Activate elements and adjust nested element tabindex dynamically with JS.
+   - Add ARIA-labels to describe element roles for assistive technologies.
+
+10. Descriptive Link Text:
+    - Ensure link text is descriptive and underlined for clarity. Make the changes stated above and return the entire modified code, such that the web page obtained is WCAG and ARIA compliant
