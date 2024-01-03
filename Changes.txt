@@ -1,0 +1,7 @@
+Alt text for images are missing.
+Table layout is used, instead of semantic HTML elements like header, nav, main, section and footer.
+Link text are not descriptive and meaningful.
+Hidden (Nested) html elements are not accessible.
+Dynamic JavaScript interactions are not accessible.
+Skip to Important links button is missing.
+Order of focusable elements needs to be improved using tab indexing.
