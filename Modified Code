@@ -9,20 +9,21 @@
 <%@ include file="/include/ErrorInc.jsp"%>
 
 <script type="text/javascript" language="JavaScript1.2">
-<logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
-    document.title = '<bean:message key="label.ctgryList.pageHeading.stdRpt"/>';
-</logic:equal>
-<logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
-    document.title = '<bean:message key="label.ctgryList.pageHeading.doc"/>';
-</logic:equal>
+    <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+        document.title = '<bean:message key="label.ctgryList.pageHeading.stdRpt"/>';
+    </logic:equal>
+    <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+        document.title = '<bean:message key="label.ctgryList.pageHeading.doc"/>';
+    </logic:equal>
 </script>
+
 <script type="text/javascript">
 
 // Test variables
-var ctgryNamesList = "<%=request.getAttribute('ctgryNames')%>";
+var ctgryNamesList = "<c:out value='${request.getAttribute("ctgryNames")}'/>";
 var ctgryNames = ctgryNamesList.split("µ");
 
-var reportNamesList = "<%=request.getAttribute('reportNames')%>";
+var reportNamesList = "<c:out value='${request.getAttribute("reportNames")}'/>";
 var reportNames = reportNamesList.split("µ");
 // Global variable to allow console inspection of tree:
 var tree;
@@ -33,6 +34,7 @@ var tree;
     // Function to initialize the tree:
     function treeInit() {
         buildctgriesNodeTree();
+        handleTabIndexes();
     }
 
     // Function creates the tree
@@ -57,8 +59,9 @@ var tree;
 
     // Build children
     function buildReportsBranch(node, ctgryId) {
-        var pageType = '<%=request.getParameter("pagetype")%>';
+        var pageType = '<c:out value="${request.getParameter("pagetype")}" />';
         var msgNoEntries = '<bean:message key="msg.noReportsAvaliable"/>';
+
         if (pageType == 'SR')
             msgNoEntries = '<bean:message key="msg.noReportsAvaliable"/>';
         else if (pageType == 'DOC')
@@ -74,14 +77,17 @@ var tree;
                     var myobj1 = {
                         label: reportNames[j].split("¬")[1],
                         group: "reports",
-                        href: "javascript:void saveSelectedReport('" + escape(reportNames[j]) + "');"
+                        href: "javascript:void saveSelectedReport('" + escape(reportNames[j]) + "');",
+                        role: "link", // ARIA role for link
+                        tabindex: "0" // Keyboard accessibility
                     };
                 } else {
                     // Add to report tree of THE ctgry
                     var myobj1 = {
                         label: reportNames[j].split("¬")[1],
                         group: "reports",
-                        labelStyle: "ygtvcontent"
+                        labelStyle: "ygtvcontent",
+                        role: "presentation" // ARIA role for presentation
                     };
                 }
 
@@ -93,10 +99,20 @@ var tree;
     // Add an onDOMReady handler to build the tree when the document is ready
     YAHOO.util.Event.onDOMReady(treeInit);
 
+    // Handle tab indexing
+    function handleTabIndexes() {
+        var treeDiv = document.getElementById("treeDiv1");
+        var treeNodes = treeDiv.getElementsByTagName("a");
+
+        for (var i = 0; i < treeNodes.length; i++) {
+            treeNodes[i].setAttribute("tabindex", "0");
+        }
+    }
+
 })();
 
 function saveSelectedReport(reportDetails) {
-    var pageType = '<%=request.getParameter("pagetype")%>';
+    var pageType = '<c:out value="${request.getParameter("pagetype")}" />';
     var msgNoEntries = '<bean:message key="msg.noReportsAvaliable"/>';
 
     if (pageType == 'SR')
@@ -112,120 +128,116 @@ function saveSelectedReport(reportDetails) {
     }
 }
 </script>
+
 <!-- HEADER begin -->
-<table border="0" cellpadding="0" cellspacing="0" style="width: 510px">
-<!-- TITLE begin -->
-<tr>
-    <td></td>
-    <td class="ContentTitle1">
-        <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
-            <bean:message key="label.ctgryList.pageHeading.stdRpt"/>
-        </logic:equal>
-        <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
-            <bean:message key="label.ctgryList.pageHeading.doc"/>
-        </logic:equal>
-    </td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-<!-- TITLE end -->
-<!-- HEADER end -->
-<!-- TEXT begin -->
-<html:form action="ctgriesListDisplay" method="POST" role="form">
+<table border="0" cellpadding="0" cellspacing="0" style="WIDTH: 510px">
+    <!-- TITLE begin -->
     <tr>
         <td></td>
-        <td colspan="2"><br>
-            <p class="ContentText">
-                <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
-                    <bean:message key="label.ctgryList.pageMsg.stdRpt"/>
-                </logic:equal>
-                <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
-                    <bean:message key="label.ctgryList.pageMsg.doc"/>
-                </logic:equal>
-            </p>
+        <td class="ContentTitle1">
+            <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+                <bean:message key="label.ctgryList.pageHeading.stdRpt"/>
+            </logic:equal>
+            <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+                <bean:message key="label.ctgryList.pageHeading.doc"/>
+            </logic:equal>
         </td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
+    <!-- TITLE end -->
+    <!-- HEADER end -->
+    <!-- TEXT begin -->
+    <html:form action="ctgriesListDisplay" method="POST">
+        <tr>
+            <td></td>
+            <td colspan="2"><BR>
+                <p class="ContentText">
+                    <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+                        <bean:message key="label.ctgryList.pageMsg.stdRpt"/>
+                    </logic:equal>
+                    <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+                        <bean:message key="label.ctgryList.pageMsg.doc"/>
+                    </logic:equal>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     <!-- TEXT end -->
     <!-- SPACER begin -->
-    <tr>
-        <td width="15"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15" alt=""></td>
-        <td width="10"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt=""></td>
-        <td width="110"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="110" alt=""></td>
-        <td width="10"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt=""></td>
-        <td width="15"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15" alt=""></td>
-        <td width="10"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt=""></td>
-    </tr>
+        <tr>
+            <td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15"></td>
+            <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+            <td width="110"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="110"></td>
+            <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+            <td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15"></td>
+            <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+        </tr>
     <!-- SPACER end -->
     <!-- CONTENT begin -->
-    <tr>
-        <td></td>
-        <td colspan="3" valign="top" width="860"><!-- TABLE TO CREATE DOUBLE-TABLE begin-->
+        <tr>
+            <td></td>
+            <td colspan="3" valign="top" width="860"><!-- TABLE TO CREATE DOUBLE-TABLE begin-->
             <table>
                 <tr>
                     <td colspan="3"><!-- TABLE 2 - Services - begin -->
-                        <table width="700" border="0" cellspacing="0" cellpadding="0" role="presentation">
-                            <tr>
-                                <!-- TABLE LEFT CORNER begin -->
-                                <td colspan="2" rowspan="2" class="TableHeader1LeftCorner" width="13" align="left" valign="top"><img
-                                        height="16"
-                                        src="<c:out value="${configuration.imagesPath}"/>/section_corner_left.gif" width="13"
-                                        alt=""></td>
-                                <!-- TABLE LEFT CORNER end -->
-                                <td colspan="5" width="100%" height="1" class="TableBorder1" role="presentation"></td>
-                                <!-- TABLE RIGHT CORNER begin -->
-                                <td colspan="2" rowspan="2" class="TableHeader1RightCorner" width="13" align="right" valign="top"><img
-                                        height="16"
-                                        src="<c:out value="${configuration.imagesPath}"/>/section_corner_right.gif" width="13"
-                                        alt=""></td>
-                                <!-- TABLE RIGHT CORNER end -->
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="TableHeader1" width="510">
-                                    <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
-                                        <bean:message key="label.ctgryList.tblHeading.stdRpt"/>
-                                    </logic:equal>
-                                    <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
-                                        <bean:message key="label.ctgryList.tblHeading.doc"/>
-                                    </logic:equal>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="9" height="1" class="TableBorder1" role="presentation"></td>
-                            </tr>
-                            <tr>
-                                <td width="1" class="TableBorder1" height="30"></td>
-                                <td width="12"></td>
-                                <td colspan="5">
-                                    <div id="treeDiv1" role="tree"></div>
-                                </td>
-                                <td width="12"></td>
-                                <td width="1" class="TableBorder1" role="presentation"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="9" height="1" class="TableBorder1" role="presentation"></td>
-                            </tr>
-                        </table>
-                        <td width="14">&nbsp;</td>
-                </tr>
-            </table>
-        </tr>
-        <!-- CONTENT end -->
-        <!-- SPACER begin -->
+                    <table width="700" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <!-- TABLE LEFT CORNER begin -->
+                            <td colspan="2" rowspan="2" class="TableHeader1LeftCorner" width="13" align="left" valign="top"><IMG height="16"
+                                src="<c:out value="${configuration.imagesPath}"/>/section_corner_left.gif" width="13"></td>
+                            <!-- TABLE LEFT CORNER end -->
+                            <td colspan="5" width="100%" height="1" class="TableBorder1"></td>
+                            <!-- TABLE RIGHT CORNER begin -->
+                            <td colspan="2" rowspan="2" class="TableHeader1RightCorner" width="13" align="right" valign="top"><IMG height="16"
+                                src="<c:out value="${configuration.imagesPath}"/>/section_corner_right.gif" width="13"></td>
+                            <!-- TABLE RIGHT CORNER end -->
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="TableHeader1" width="510">
+                            <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+                                <bean:message key="label.ctgryList.tblHeading.stdRpt"/>
+                            </logic:equal>
+                            <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+                                <bean:message key="label.ctgryList.tblHeading.doc"/>
+                        </logic:equal>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" height="1" class="TableBorder1"></td>
+                    </tr>
+                    <tr>
+                        <td width="1" class="TableBorder1" height="30"></td>
+                        <td width="12"></td>
+                        <td colspan="5"><div id="treeDiv1"></div></td>
+                        <td width="12"></td>
+                        <td width="1" class="TableBorder1"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" height="1" class="TableBorder1"></td>
+                    </tr>
+                </table>
+                <td width="14">&nbsp;</td>
+            </tr>
+        </table>
+    </tr>
+<!-- CONTENT end -->
+<!-- SPACER begin -->
         <tr>
-            <td width="15"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15" alt=""></td>
-            <td width="10"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt=""></td>
-            <td width="110"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="110" alt=""></td>
-            <td width="10"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt=""></td>
-            <td width="15"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15" alt=""></td>
-            <td width="90"><img height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="90" alt=""></td>
+            <td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15"></td>
+            <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+            <td width="110"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="110"></td>
+            <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+            <td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15"></td>
+            <td width="90"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="90"></td>
         </tr>
-        <!-- SPACER end -->
-        <input type="hidden" name="reportDetails" />
-        <input type="hidden" name="pagetype" />
+<!-- SPACER end -->
+            <input type="hidden" name="reportDetails" />
+            <input type="hidden" name="pagetype" />
 
 </table>
 </html:form>
+                            
