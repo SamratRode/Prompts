@@ -1,0 +1,18 @@
+Tool 1
+Analyze the given code for web accessibility and generate a report that checks for
+table-based layout using semantic HTML and CSS, incorporating tags like <header>, <nav>, <main>, <article>, <section>, and <aside>.
+Accessibility with proper ARIA roles and attributes for key elements, provide descriptive alternative text for images, and handle tab indexing for keyboard navigation.
+Keyboard accessibility, visible focus indicators, and testing with a keyboard for dynamic elements.
+Visual and keyboard navigation by adjusting element sizes for low visibility users, applying focus styles, including a "Skip to main content" link.
+Form accessibility by ensuring clear labels using the “for” attribute, adding descriptive texts to buttons with high contrast mode, and presenting validation messages clearly..
+Address JavaScript interaction and nested elements by activating elements dynamically.
+Ensure descriptive link text by making it clear and underlined.
+
+Tool2 
+To better structure, associate and navigate the content for all users including screen reader users, it is
+recommended to add HTML5 semantic tags, ARIA roles and labels, use appropriate heading tags to 
+define sections and questions, include skip links, meet WCAG color contrast standards, structure logically 
+without tables for layout, add focus styles for keyboard navigation, use semantic tags for lists, include 
+ARIA attributes as needed, define the language, include link titles, and ensure all content remains 
+readable and operable without stylesheets by adding alt text for images, labeling form fields, linking 
+questions to headings with aria-labelledby, and role attributes for non-semantic elements. 
