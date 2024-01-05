@@ -1,0 +1,235 @@
+<%@ taglib uri="/WEB-INF/c.tld" prefix="c"%>
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+
+<jsp:useBean id="configuration" scope="request" class="abc.beans.ConfigurationBean" />
+<jsp:useBean id="ctgriesListDisplayForm" scope="request" class="abc.forms.AvailablectgriesListForm" />
+
+<%@ include file="/include/ErrorInc.jsp"%>
+
+<script type="text/javascript" language="JavaScript1.2">
+<logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+		document.title = '<bean:message key="label.ctgryList.pageHeading.stdRpt"/>';
+		</logic:equal>
+		<logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+		document.title = '<bean:message key="label.ctgryList.pageHeading.doc"/>';
+		</logic:equal>
+	</script>
+<script type="text/javascript">
+
+//Test variables
+	var ctgryNamesList ="<%=request.getAttribute("ctgryNames")%>";
+	var ctgryNames = ctgryNamesList.split("µ");
+
+	var reportNamesList ="<%=request.getAttribute("reportNames")%>";
+	var reportNames = reportNamesList.split("µ");
+	//global variable to allow console inspection of tree:
+	var tree;
+
+			//anonymous function wraps the remainder of the logic:
+			(function()
+			{
+
+					//function to initialize the tree:
+				    function treeInit() {
+				        buildctgriesNodeTree();
+				    }
+
+						//Function  creates the tree
+					    function buildctgriesNodeTree() {
+				//instantiate the tree:
+       	       tree = new YAHOO.widget.TreeView("treeDiv1");
+
+
+       				for(var i=0;i<ctgryNames.length;i++)
+							 {
+							  	var ctgryId = ctgryNames[i].split("¬")[0];
+							  	 //Add to ctgry Tree
+							  	 var myobj = {
+        	 	                      label: ctgryNames[i].split("¬")[1],
+        	 	                      group: "ctgry"
+                                 };
+                  var tmpNode = new YAHOO.widget.TextNode(myobj, tree.getRoot(), false);
+                 buildReportsBranch(tmpNode,ctgryId);
+
+
+							  }
+
+
+						//The tree is not created in the DOM until this method is called:
+				        tree.draw();
+       }
+
+	//build children
+   function buildReportsBranch(node,ctgryId)
+    {
+    var pageType = '<%=request.getParameter("pagetype")%>' ;
+    var msgNoEntries = '<bean:message key="msg.noReportsAvaliable"/>' ;
+    if(pageType == 'SR')
+     msgNoEntries = '<bean:message key="msg.noReportsAvaliable"/>' ;
+    else if(pageType == 'DOC')
+     msgNoEntries = '<bean:message key="msg.noDocsAvaliable"/>' ;
+    	            for(var j=0;j<reportNames.length;j++)
+							  	 {
+							  	 	 var reportctgryId = reportNames[j].split("¬")[0];
+							  	 	 var reportNm =  reportNames[j].split("¬")[1];
+							   	 	 if(ctgryId == reportctgryId )  {
+
+							  	 	   if(reportNm != msgNoEntries) {
+							  	 	 	//Add to report tree of THE ctgry
+							  	 	 	 var myobj1 = {
+                                     label: reportNames[j].split("¬")[1],
+                                     group: "reports",
+                                     href:"javascript:void saveSelectedReport('" + escape(reportNames[j])+ "');"
+                                   			 };
+	                                   } else {
+		                                    //Add to report tree of THE ctgry
+									  	 	 var myobj1 = {
+		                                     label: reportNames[j].split("¬")[1],
+		                                     group: "reports",
+		                                     labelStyle:"ygtvcontent"
+		                                    };
+	                                   }
+
+                       new YAHOO.widget.TextNode(myobj1, node, false);
+							  	 	 }
+							  	 }
+
+    }
+
+
+	//Add an onDOMReady handler to build the tree when the document is ready
+    YAHOO.util.Event.onDOMReady(treeInit);
+
+})();
+
+function saveSelectedReport(reportDetails)
+{
+  var pageType = '<%=request.getParameter("pagetype")%>' ;
+  var msgNoEntries = '<bean:message key="msg.noReportsAvaliable"/>' ;
+
+  if(pageType == 'SR')
+     msgNoEntries = '<bean:message key="msg.noReportsAvaliable"/>' ;
+   else if(pageType == 'DOC')
+     msgNoEntries = '<bean:message key="msg.noDocsAvaliable"/>' ;
+
+ if(reportDetails.split("¬")[1] != msgNoEntries)
+ {
+  document.forms[0].reportDetails.value=reportDetails;
+  document.forms[0].pagetype.value= pageType;
+  document.forms[0].action="abc/selectReportCriteria";
+  document.forms[0].submit();
+ }
+}
+</script>
+<!-- HEADER begin -->
+<table border="0" cellpadding="0" cellspacing="0" style="WIDTH: 510px">
+<!-- TITLE begin -->
+	<tr>
+		<td></td>
+		<td class="ContentTitle1">
+			<logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+				<bean:message key="label.ctgryList.pageHeading.stdRpt"/>
+			</logic:equal>
+			<logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+				<bean:message key="label.ctgryList.pageHeading.doc"/>
+			</logic:equal>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+<!-- TITLE end -->
+<!-- HEADER end -->
+<!-- TEXT begin -->
+	<html:form action="ctgriesListDisplay" method="POST">
+		<tr>
+			<td></td>
+			<td colspan="2"><BR>
+				<p class="ContentText">
+				<logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+					<bean:message key="label.ctgryList.pageMsg.stdRpt"/>
+				</logic:equal>
+				<logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+					<bean:message key="label.ctgryList.pageMsg.doc"/>
+				</logic:equal>
+				</p>
+			</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+<!-- TEXT end -->
+<!-- SPACER begin -->
+		<tr>
+			<td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15"></td>
+			<td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+			<td width="110"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="110"></td>
+			<td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+			<td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15"></td>
+			<td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+		</tr>
+<!-- SPACER end -->
+<!-- CONTENT begin -->
+		<tr>
+			<td></td>
+			<td colspan="3" valign="top" width="860"><!-- TABLE TO CREATE DOUBLE-TABLE begin-->
+			<table>
+				<tr>
+					<td colspan="3"><!-- TABLE 2 - Services - begin -->
+					<table width="700" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<!-- TABLE LEFT CORNER begin -->
+							<td colspan="2" rowspan="2" class="TableHeader1LeftCorner" width="13" align="left" valign="top"><IMG height="16"
+								src="<c:out value="${configuration.imagesPath}"/>/section_corner_left.gif" width="13"></td>
+							<!-- TABLE LEFT CORNER end -->
+							<td colspan="5" width="100%" height="1" class="TableBorder1"></td>
+							<!-- TABLE RIGHT CORNER begin -->
+							<td colspan="2" rowspan="2" class="TableHeader1RightCorner" width="13" align="right" valign="top"><IMG height="16"
+								src="<c:out value="${configuration.imagesPath}"/>/section_corner_right.gif" width="13"></td>
+							<!-- TABLE RIGHT CORNER end -->
+						</tr>
+						<tr>
+							<td colspan="5" class="TableHeader1" width="510">
+							<logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+								<bean:message key="label.ctgryList.tblHeading.stdRpt"/>
+							</logic:equal>
+							<logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+								<bean:message key="label.ctgryList.tblHeading.doc"/>
+							</logic:equal>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="9" height="1" class="TableBorder1"></td>
+						</tr>
+						<tr>
+							<td width="1" class="TableBorder1" height="30"></td>
+				            <td width="12"></td>
+			    	        <td colspan="5"><div id="treeDiv1"></div></td>
+			        	    <td width="12"></td>
+			            	<td width="1" class="TableBorder1"></td>
+						</tr>
+                    	<tr>
+							<td colspan="9" height="1" class="TableBorder1"></td>
+						</tr>
+					</table>
+					<td width="14">&nbsp;</td>
+				</tr>
+			</table>
+		</tr>
+<!-- CONTENT end -->
+<!-- SPACER begin -->
+			<tr>
+				<td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15"></td>
+				<td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+				<td width="110"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="110"></td>
+				<td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10"></td>
+				<td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15"></td>
+				<td width="90"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="90"></td>
+			</tr>
+<!-- SPACER end -->
+				<input type="hidden" name="reportDetails" />
+				<input type="hidden" name="pagetype" />
+	</html:form>
+</table>
