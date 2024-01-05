@@ -1,0 +1,185 @@
+<%@ taglib uri="/WEB-INF/c.tld" prefix="c"%>
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+
+<!-- Add this CSS to your existing stylesheet or in the head section of your HTML -->
+<style>
+  /* Style for focused elements */
+  :focus {
+    outline: 2px solid #3273dc; /* You can customize the color */
+    outline-offset: 2px;
+  }
+
+  /* Style for tree node focus */
+  .ygtvfocus {
+    outline: 2px solid #3273dc; /* You can customize the color */
+    outline-offset: 2px;
+  }
+
+  /* Style for accessible elements */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #3273dc;
+    color: #ffffff;
+    padding: 5px;
+    z-index: 1000;
+  }
+
+  /* Style for high contrast mode */
+  .high-contrast {
+    background: #fff; /* Set the background color for high contrast mode */
+    color: #000; /* Set the text color for high contrast mode */
+  }
+
+  /* Style for descriptive and underlined links */
+  a {
+    text-decoration: underline; /* Underline link text for clarity */
+    color: #3273dc; /* Customize link text color */
+  }
+</style>
+
+<jsp:useBean id="configuration" scope="request" class="abc.beans.ConfigurationBean" />
+<jsp:useBean id="ctgriesListDisplayForm" scope="request" class="abc.forms.AvailablectgriesListForm" />
+
+<%@ include file="/include/ErrorInc.jsp"%>
+
+<!-- Skip to Important Links -->
+<a class="skip-link" href="#important-links">Skip to Important Links</a>
+
+<!-- Button for enabling high contrast mode -->
+<button onclick="toggleHighContrast()" id="highContrastBtn">Toggle High Contrast Mode</button>
+
+<script type="text/javascript" language="JavaScript1.2">
+  // Function to toggle high contrast mode
+  function toggleHighContrast() {
+    document.body.classList.toggle('high-contrast');
+  }
+
+  // ... Your existing JavaScript code ...
+</script>
+
+<!-- HEADER begin -->
+<table border="0" cellpadding="0" cellspacing="0" style="WIDTH: 510px">
+  <!-- TITLE begin -->
+  <tr>
+    <td></td>
+    <td class="ContentTitle1">
+      <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+        <label for="pageTypeStdRpt"><bean:message key="label.ctgryList.pageHeading.stdRpt"/></label>
+        <input type="text" id="pageTypeStdRpt" name="pageTypeStdRpt" value="<bean:write name='ctgriesListDisplayForm' property='pageType'/>" readonly="readonly" style="border: none; background-color: transparent;"/>
+      </logic:equal>
+      <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+        <label for="pageTypeDoc"><bean:message key="label.ctgryList.pageHeading.doc"/></label>
+        <input type="text" id="pageTypeDoc" name="pageTypeDoc" value="<bean:write name='ctgriesListDisplayForm' property='pageType'/>" readonly="readonly" style="border: none; background-color: transparent;"/>
+      </logic:equal>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <!-- TITLE end -->
+  <!-- HEADER end -->
+  <!-- TEXT begin -->
+  <html:form action="ctgriesListDisplay" method="POST" role="form">
+    <tr>
+      <td></td>
+      <td colspan="2"><BR>
+        <p class="ContentText">
+          <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+            <label for="pageMsgStdRpt"><bean:message key="label.ctgryList.pageMsg.stdRpt"/></label>
+            <span id="pageMsgStdRpt"><bean:message key="label.ctgryList.pageMsg.stdRpt"/></span>
+          </logic:equal>
+          <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+            <label for="pageMsgDoc"><bean:message key="label.ctgryList.pageMsg.doc"/></label>
+            <span id="pageMsgDoc"><bean:message key="label.ctgryList.pageMsg.doc"/></span>
+          </logic:equal>
+        </p>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <!-- TEXT end -->
+    <!-- SPACER begin -->
+    <tr>
+      <td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15" alt="Spacer Image Description"></td>
+      <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt="Spacer Image Description"></td>
+      <td width="110"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="110" alt="Spacer Image Description"></td>
+      <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt="Spacer Image Description"></td>
+      <td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15" alt="Spacer Image Description"></td>
+      <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt="Spacer Image Description"></td>
+    </tr>
+    <!-- SPACER end -->
+    <!-- CONTENT begin -->
+    <tr id="important-links"> <!-- Anchor for "Skip to Important Links" -->
+      <td></td>
+      <td colspan="3" valign="top" width="860">
+        <!-- TABLE TO CREATE DOUBLE-TABLE begin-->
+        <table role="treegrid" aria-labelledby="important-links">
+          <tr>
+            <td colspan="3"><!-- TABLE 2 - Services - begin -->
+              <table width="700" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <!-- TABLE LEFT CORNER begin -->
+                  <td colspan="2" rowspan="2" class="TableHeader1LeftCorner" width="13" align="left" valign="top"><IMG height="16"
+                    src="<c:out value="${configuration.imagesPath}"/>/section_corner_left.gif" width="13" alt="Table Left Corner Description"></td>
+                  <!-- TABLE LEFT CORNER end -->
+                  <td colspan="5" width="100%" height="1" class="TableBorder1"></td>
+                  <!-- TABLE RIGHT CORNER begin -->
+                  <td colspan="2" rowspan="2" class="TableHeader1RightCorner" width="13" align="right" valign="top"><IMG height="16"
+                    src="<c:out value="${configuration.imagesPath}"/>/section_corner_right.gif" width="13" alt="Table Right Corner Description"></td>
+                  <!-- TABLE RIGHT CORNER end -->
+                </tr>
+                <tr>
+                  <td colspan="5" class="TableHeader1" width="510">
+                    <logic:equal name="ctgriesListDisplayForm" property="pageType" value="SR">
+                      <label for="tblHeadingStdRpt"><bean:message key="label.ctgryList.tblHeading.stdRpt"/></label>
+                      <span id="tblHeadingStdRpt"><bean:message key="label.ctgryList.tblHeading.stdRpt"/></span>
+                    </logic:equal>
+                    <logic:equal name="ctgriesListDisplayForm" property="pageType" value="DOC">
+                      <label for="tblHeadingDoc"><bean:message key="label.ctgryList.tblHeading.doc"/></label>
+                      <span id="tblHeadingDoc"><bean:message key="label.ctgryList.tblHeading.doc"/></span>
+                    </logic:equal>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9" height="1" class="TableBorder1"></td>
+                </tr>
+                <tr>
+                  <td width="1" class="TableBorder1" height="30"></td>
+                  <td width="12"></td>
+                  <td colspan="5">
+                    <!-- Add labels for form elements -->
+                    <label for="treeDiv1"><bean:message key="label.treeDiv1"/></label>
+                    <div id="treeDiv1" role="tree" aria-labelledby="treeDiv1Label" tabindex="0"></div>
+                  </td>
+                  <td width="12"></td>
+                  <td width="1" class="TableBorder1"></td>
+                </tr>
+                <tr>
+                  <td colspan="9" height="1" class="TableBorder1"></td>
+                </tr>
+              </table>
+              <td width="14">&nbsp;</td>
+            </tr>
+          </table>
+        </tr>
+        <!-- CONTENT end -->
+        <!-- SPACER begin -->
+        <tr>
+          <td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15" alt="Spacer Image Description"></td>
+          <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt="Spacer Image Description"></td>
+          <td width="110"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="110" alt="Spacer Image Description"></td>
+          <td width="10"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="10" alt="Spacer Image Description"></td>
+          <td width="15"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="15" alt="Spacer Image Description"></td>
+          <td width="90"><IMG height="15" src="<c:out value="${configuration.imagesPath}"/>/spacer.gif" width="90" alt="Spacer Image Description"></td>
+        </tr>
+        <!-- SPACER end -->
+        <input type="hidden" name="reportDetails" aria-hidden="true" />
+        <input type="hidden" name="pagetype" aria-hidden="true" />
+      </html:form>
+    </table>
+  </table>
